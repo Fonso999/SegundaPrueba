@@ -15,8 +15,13 @@ public class Agenda {
     private HashMap<String, Contacto> contactos = new HashMap();
     private static int n = 0;
     private static int count = 0;
- 
-    public Contacto addContacto(Contacto contacto) throws ContactoRepetidoException {
+ /**
+  * Añade un contacto
+  * @param contacto Contacto que queremos añadir
+  * @return Objeto contacto añadido o genera una excepción si ya existía
+  * @throws ContactoRepetidoException Excepcion programada, paquete exception 
+  */
+   public Contacto addContacto(Contacto contacto) throws ContactoRepetidoException {
         if (contactos.containsKey(contacto.getEmail())) {
             //
             throw new ContactoRepetidoException("Ya existe un contacto con email: " + contacto.getEmail());
@@ -27,7 +32,11 @@ public class Agenda {
         count++;
         return contacto;
     }
-
+/**
+ *  Elimina un contacto
+ * @param email Correo electronico del objeto que queremos eliminar
+ * @return Contacto eliminado sino null
+ */
     public Contacto eliminarContacto(String email) { 
         Contacto contacto = buscarContacto(email);
         if (contacto != null) {
@@ -36,7 +45,11 @@ public class Agenda {
         }
         return contacto;
     }
-
+/**
+ *  Busca un contacto en la agenda
+ * @param email Correo electronico del objeto que se quiere encontar
+ * @return  El email del contacto buscado sino null
+ */
     public Contacto buscarContacto(String email) { 
         Contacto contacto = null;
         if (!contactos.containsKey(email)) {
@@ -47,7 +60,10 @@ public class Agenda {
         return contactos.get(email);
         }
     }
-
+/**
+ * Coge todos los contactos en la agenda
+ * @return Lista de contactos
+ */
     public ArrayList<Contacto> getContactos() {
         ArrayList<Contacto> contactosList = new ArrayList<>();
         contactosList.addAll(contactos.values());
